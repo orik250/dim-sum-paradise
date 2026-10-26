@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,6 +41,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.myapplication.ui.theme.MyApplicationTheme
+import java.nio.file.WatchEvent
 
 
 class MainActivity : ComponentActivity() {
@@ -47,62 +49,77 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .background(Color.Gray)
-                    .padding(start = 12.dp, end = 12.dp)
-                    .fillMaxSize()
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(144.dp)
-                        .clip(RoundedCornerShape(12.dp))
-                        .background(Color.Blue)
+            MainLayout()
+        }
+
+    }
+}
+@Composable
+fun MainLayout(){
+    Icon(
+        painter = painterResource(R.drawable.baseline_star_outline_24),
+        contentDescription = "Star",
+        )
+    Column(
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier
+            .background(Color.Gray)
+            .padding(start = 12.dp, end = 12.dp)
+            .fillMaxSize()
+    ) {
+        ProfileRow()
+        Spacer(modifier = Modifier.height(12.dp))
+        ProfileRow()
+    }
+}
+@Composable
+fun ProfileRow() {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(144.dp)
+            .clip(RoundedCornerShape(12.dp))
+            .background(Color.Blue)
 
 
-                ) {
-                    Spacer(
-                        modifier = Modifier.width(20.dp)
-                    )
-                    Image(
-                        painter = painterResource(R.drawable.dim_sum_paradise),
-                        contentDescription = "dim sum",
-                        contentScale = ContentScale.Crop,
-                        alignment = Alignment.Center,
-                        modifier = Modifier
-                            .size(120.dp)
-                            .border(
-                                width = 6.dp,
-                                color = Color.Gray,
-                                shape = RoundedCornerShape(12.dp)
-                            )
-                            .clip(RoundedCornerShape(12.dp))
-                    )
-                    Spacer(modifier = Modifier.width(12.dp))
-                    Column(
-                        verticalArrangement = Arrangement.SpaceBetween,
-                        modifier = Modifier.height(120.dp)
-                    ) {
-                        Text(
-                            text = "OCT",
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 32.sp,
-                        )
-                        Text(
-                            text = "Dim Sum Paradise",
-                            fontSize = 24.sp
-                        )
-                        Text(
-                            text = "March 15, 2024",
-                            fontWeight = FontWeight.Light
-                        )
-                    }
-                }
-            }
+    ) {
+        Spacer(
+            modifier = Modifier.width(20.dp)
+        )
+        Image(
+            painter = painterResource(R.drawable.dim_sum_paradise),
+            contentDescription = "dim sum",
+            contentScale = ContentScale.Crop,
+            alignment = Alignment.Center,
+            modifier = Modifier
+                .size(120.dp)
+                .border(
+                    width = 6.dp,
+                    color = Color.Gray,
+                    shape = RoundedCornerShape(12.dp)
+                )
+                .clip(RoundedCornerShape(12.dp))
+        )
+        Spacer(modifier = Modifier.width(12.dp))
+        Column(
+            verticalArrangement = Arrangement.SpaceBetween,
+            modifier = Modifier.height(120.dp)
+        ) {
+            Text(
+                text = "OCT",
+                fontWeight = FontWeight.Bold,
+                fontSize = 32.sp,
+            )
+            Text(
+                text = "Dim Sum Paradise",
+                fontSize = 24.sp
+            )
+            Text(
+                text = "March 15, 2024",
+                fontWeight = FontWeight.Light
+            )
         }
     }
 }
