@@ -56,10 +56,12 @@ class MainActivity : ComponentActivity() {
 }
 @Composable
 fun MainLayout(){
-    Icon(
-        painter = painterResource(R.drawable.baseline_star_outline_24),
-        contentDescription = "Star",
-        )
+    val row1Data = ProfileInfo(
+        image = R.drawable.dim_sum_paradise,
+        name = "Dim Sum Paradise",
+        detail1 = "OCT",
+        detail2 = "March 15 2024",
+    )
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -68,13 +70,13 @@ fun MainLayout(){
             .padding(start = 12.dp, end = 12.dp)
             .fillMaxSize()
     ) {
-        ProfileRow()
+        ProfileRow(row1Data)
         Spacer(modifier = Modifier.height(12.dp))
-        ProfileRow()
+        ProfileRow(row1Data)
     }
 }
 @Composable
-fun ProfileRow() {
+fun ProfileRow(rowInfo: ProfileInfo) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier
@@ -89,15 +91,15 @@ fun ProfileRow() {
             modifier = Modifier.width(20.dp)
         )
         Image(
-            painter = painterResource(R.drawable.dim_sum_paradise),
-            contentDescription = "dim sum",
+            painter = painterResource(rowInfo.image),
+            contentDescription = rowInfo.name,
             contentScale = ContentScale.Crop,
             alignment = Alignment.Center,
             modifier = Modifier
                 .size(120.dp)
                 .border(
                     width = 6.dp,
-                    color = Color.Gray,
+                    color = Color.DarkGray,
                     shape = RoundedCornerShape(12.dp)
                 )
                 .clip(RoundedCornerShape(12.dp))
@@ -107,17 +109,26 @@ fun ProfileRow() {
             verticalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.height(120.dp)
         ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    text = rowInfo.name,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 32.sp,
+                )
+                Spacer(modifier = Modifier.width(12.dp))
+                Icon(
+                    painter = painterResource(R.drawable.baseline_star_outline_24),
+                    contentDescription = "Star"
+                )
+            }
             Text(
-                text = "OCT",
-                fontWeight = FontWeight.Bold,
-                fontSize = 32.sp,
-            )
-            Text(
-                text = "Dim Sum Paradise",
+                text = rowInfo.detail1,
                 fontSize = 24.sp
             )
             Text(
-                text = "March 15, 2024",
+                text = rowInfo.detail2,
                 fontWeight = FontWeight.Light
             )
         }
